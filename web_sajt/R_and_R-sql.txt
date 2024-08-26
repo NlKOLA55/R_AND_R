@@ -1,0 +1,74 @@
+CREATE TABLE Admins(
+    id INT AUTO_INCREMENT, 
+    PRIMARY KEY(id),
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+);
+
+CREATE TABLE Users(
+    id INT AUTO_INCREMENT, 
+    PRIMARY KEY(id),
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    phone VARCHAR(20) DEFAULT 'Not provided',
+    fname VARCHAR(50) NOT NULL,
+    lname VARCHAR(50) NOT NULL,
+    gender VARCHAR(20) DEFAULT 'Prefer not to say',
+    birthDate DATE NOT NULL,
+);
+
+CREATE TABLE Doctors(
+    id INT AUTO_INCREMENT, 
+    PRIMARY KEY (id),
+    email VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL;
+    fname VARCHAR(50) NOT NULL,
+    lname VARCHAR(50) NOT NULL,
+    profile_image BLOB,
+    msg TEXT,
+    treatments VARCHAR(50) NOT NULL
+);
+CREATE TABLE WorkInfo(
+    doctor_id INT,
+    FOREIGN KEY(doctor_id) REFERENCES Doctors(id),
+    day VARCHAR(50) NOT NULL,
+    start_time TIME NOT NULL DEFAULT '07:00:00',
+    end_time TIME NOT NULL DEFAULT '17:00:00'
+);
+
+CREATE TABLE Apointment(
+    id INT AUTO_INCREMENT,
+    PRIMARY KEY(id),
+    created_date DATE NOT NULL,
+    created_time TIME NOT NULL,
+    Apointment_date DATE NOT NULL,
+    Apointment_time TIME NOT NULL,
+    user_id INT,
+    FOREIGN Key(user_id) REFERENCES Users(id),
+    doctor_id INT,
+    FOREIGN Key(doctor_id) REFERENCES Doctors(id),
+    treatments VARCHAR(50) NOT NULL,
+    msg TEXT
+)
+
+CREATE TABLE Admin_logins(
+    admin_id INT,
+    FOREIGN KEY(admin_id) REFERENCES Admins(id),
+    login_date DATE NOT NULL,
+    login_Time TIME NOT NULL
+    )
+CREATE TABLE User_logins(
+    user_id INT,
+    FOREIGN KEY(user_id) REFERENCES users(id),
+    login_date DATE NOT NULL,
+    login_time TIME NOT NULL
+    );
+CREATE TABLE Doctor_logins(
+         INT,
+    FOREIGN KEY(doctor_id) REFERENCES doctors(id),
+    login_date DATE NOT NULL,
+    login_Time TIME NOT NULL
+    );
+
+INSERT INTO admins (email, password) 
+VALUES ("nikolamarjanusic@gmail.com",)
